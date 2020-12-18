@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "author": "s.kava1997@gmail.com",
+  "name": "Kava FloatVideo",
+  "offline_enabled": true,
+  "short_name": "KavaFloatVideo",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications"
+  ],
+  "description": "Open a floating video window from anywhere in the browser.",
+  "browser_action": {
+    "default_title": "Kava FloatVideo"
+  },
+  "icons": {
+    "64": "assets/icon_256.png"
+  }
+}
