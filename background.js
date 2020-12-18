@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener((request) => {
             "type": "basic",
             "title": "FloatVideo",
             "message": request.message,
-            "iconUrl": chrome.runtime.getURL("assets/icon_256.png")
+            "iconUrl": chrome.runtime.getURL("assets/icon_48.png")
         });
     }
 });

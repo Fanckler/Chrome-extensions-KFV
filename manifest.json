@@ -22,6 +22,8 @@
     "default_title": "Kava FloatVideo"
   },
   "icons": {
-    "64": "assets/icon_256.png"
+    "16": "assets/icon_16.png",
+    "48": "assets/icon_48.png",
+    "128": "assets/icon_128.png"
   }
 }
