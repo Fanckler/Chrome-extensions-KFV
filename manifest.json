@@ -17,7 +17,7 @@
     "https://*/*",
     "notifications"
   ],
-  "description": "Всплывающиее окно для просмотра видео с любой вкладки браузера.",
+  "description": "Всплывающее окно для просмотра видео с любой вкладки браузера.",
   "browser_action": {
     "default_title": "Kava FloatVideo"
   },
