@@ -2,11 +2,11 @@ let hasTabWithVideoTimer = 0;
 
 chrome.runtime.onMessage.addListener((request) => {
     if (request.action === 'notification') {
-        chrome.notifications.create("float-video", {
-            "type": "basic",
-            "title": "FloatVideo",
-            "message": request.message,
-            "iconUrl": chrome.runtime.getURL("assets/icon_48.png")
+        chrome.notifications.create('', {
+            title: request.type,
+            message: request.message,
+            iconUrl: 'assets/icon_48.png',
+            type: 'basic'
         });
     }
 });
@@ -29,14 +29,22 @@ chrome.browserAction.onClicked.addListener( () => {
 
     hasTabWithVideoTimer = setTimeout(() => {
         let tabs = [...tabsWithVideo].sort((a, b) => a.index > b.index ? 1 : -1);
-
-        for (let i = 0; i < tabs.length; i++) {
-            if (i === 0) {
-                chrome.tabs.executeScript(tabs[i].id, { 'file': 'resolvers/floatVideo.js' });
-            } else {
-                chrome.tabs.executeScript(tabs[i].id, { 'file': 'resolvers/pauseVideo.js' });
+        if (tabs.length !== 0) {
+            for (let i = 0; i < tabs.length; i++) {
+                if (i === 0) {
+                    chrome.tabs.executeScript(tabs[i].id, { 'file': 'resolvers/floatVideo.js' });
+                } else {
+                    chrome.tabs.executeScript(tabs[i].id, { 'file': 'resolvers/pauseVideo.js' });
+                }
+                hasTabWithVideoTimer = 0;
             }
-            hasTabWithVideoTimer = 0;
+        } else {
+            chrome.notifications.create('', {
+                title: 'Warning 😬',
+                message: 'Video not found! Open new tab with video!',
+                iconUrl: 'assets/icon_48.png',
+                type: 'basic'
+            });
         }
         clearTimeout(hasTabWithVideoTimer);
     }, 1000);

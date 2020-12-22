@@ -3,18 +3,18 @@ if ([...document.querySelectorAll("video")] && [...document.querySelectorAll("vi
         let video = [...document.querySelectorAll("video")][i];
         if (video.readyState === 4) {
             pictureInPicture(video)
+        } else {
+            chrome.runtime.sendMessage({
+                'action': 'notification',
+                'type': 'Warning 😬',
+                'message': 'The video is not ready. Try to start it manually!'
+            });
         }
     }
-} else {
-    chrome.runtime.sendMessage({
-        'action': 'notification',
-        'message': 'Video not found!'
-    });
 }
 
 function pictureInPicture(video) {
     videoInit(video);
-
     if (video.requestPictureInPicture) {
         video.requestPictureInPicture()
             .then(() => true)
@@ -22,12 +22,14 @@ function pictureInPicture(video) {
                 console.log(e);
                 chrome.runtime.sendMessage({
                     'action': 'notification',
-                    'message': 'FloatVideo is not supported in your browser!'
+                    'type': 'Error 😔',
+                    'message': 'FloatVideo is not supported in your window!'
                 });
             })
     } else {
         chrome.runtime.sendMessage({
             'action': 'notification',
+            'type': 'Error 😔',
             'message': 'Video playback from this resource should be played directly on in the same tab.'
         });
     }
